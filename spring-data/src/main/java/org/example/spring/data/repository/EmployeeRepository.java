@@ -2,6 +2,7 @@ package org.example.spring.data.repository;
 
 import java.util.List;
 import org.example.spring.data.domain.Employee;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
@@ -31,4 +32,8 @@ public interface EmployeeRepository extends Repository<Employee, Integer> {
 
   @Query(nativeQuery = true, value = "select count(1) from employee")
   Long count();
+
+  @Modifying
+  @Query("update Employee e set e.age = :age where e.id = :id")
+  void updateAgeById(@Param("id") Integer id, @Param("age") Integer age);
 }

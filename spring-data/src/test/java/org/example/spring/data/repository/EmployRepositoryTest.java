@@ -1,11 +1,11 @@
 package org.example.spring.data.repository;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
 import org.example.spring.data.domain.Employee;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -103,5 +103,13 @@ public class EmployRepositoryTest {
     Long count = repository.count();
     System.out.println("count: " + count);
     assertNotNull(count);
+  }
+
+  @Ignore
+  @Test
+  public void testUpdateAgeById() {
+    ApplicationContext context = new ClassPathXmlApplicationContext("beans-jpa.xml");
+    EmployeeRepository repository = context.getBean(EmployeeRepository.class);
+    repository.updateAgeById(1, 20);
   }
 }
